@@ -42,33 +42,24 @@ public class Main {
         String line;
         String result = "";
 
-        BufferedWriter writer = Files.newBufferedWriter(Paths.get(newFileName));
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get(newFileName + ".csv"));
 
         for (Path file : logFiles) {
             BufferedReader reader = Files.newBufferedReader(file);
 
             while ((line = reader.readLine()) != null) {
                 Matcher matcher = pattern.matcher(line);
-                int grps = matcher.groupCount();
-
                 if (matcher.find()) {
                     if (matcher.group(4) != null)
                     {
                         result = matcher.group(1) + splitter + matcher.group(2) + splitter + matcher.group(4)
                                 + splitter + matcher.group(5) + splitter + matcher.group(6);
-
-                      //  writer.write(matcher.group(1) + splitter + matcher.group(2) + splitter + matcher.group(4)
-                      //          + splitter + matcher.group(5) + splitter + matcher.group(6) + "\n");
-                    }
+}
                     else {
-                  //      result = matcher.group(1) + splitter + matcher.group(2) + splitter + matcher.group(7)
-                  //              + splitter + matcher.group(8);
-
                         writer.write(matcher.group(1) + splitter + matcher.group(2) + splitter + matcher.group(7)
                                 + splitter + matcher.group(8) + "\n");
                     }
                     writer.write(result + "\n");
-                    //System.out.println("result = " + result);
                 }
                 ;
             }
